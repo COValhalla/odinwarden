@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -298,7 +299,8 @@ function Register() {
             >
               Create Account
             </button>
-            <button
+            <Link
+              to="/"
               type="button"
               className="flex justify-center gap-1 rounded border border-slate-400 bg-white px-2 py-[1px] text-center text-slate-600 transition duration-200 hover:bg-gray-500 hover:text-white "
             >
@@ -317,7 +319,7 @@ function Register() {
                 />
               </svg>
               Log In
-            </button>
+            </Link>
           </div>
         </form>
       </div>

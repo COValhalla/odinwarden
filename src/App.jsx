@@ -1,11 +1,10 @@
 import React from 'react'
-import Login from './components/Login'
-import Register from './components/Register'
+import RouteSwitch from './RouteSwitch'
 
 function App() {
   return (
     <div>
-      <Register />
+      <RouteSwitch />
     </div>
   )
 }
