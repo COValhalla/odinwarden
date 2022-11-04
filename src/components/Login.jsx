@@ -52,6 +52,21 @@ function Login() {
     }
   }
 
+  const handleSubmit = (e) => {
+    if (emailValid && passwordValid) {
+      e.preventDefault()
+      console.log('Submitted.')
+    }
+
+    if (!emailValid) {
+      checkEmailValidation()
+    }
+
+    if (!passwordValid) {
+      checkPasswordValidation()
+    }
+  }
+
   return (
     <div className="mx-auto flex max-w-[481px] flex-col text-slate-900">
       <div className="px-5 pb-4 pt-8">
@@ -64,7 +79,7 @@ function Login() {
         </p>
       </div>
       <div className="rounded border border-gray-300 bg-white p-5 shadow-inner">
-        <form className="flex flex-col gap-2" action="">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-2" action="">
           <div className="flex flex-col gap-1">
             <label className="text-xs" htmlFor="email">
               <span className="font-bold">Email Address</span> (required)
@@ -164,7 +179,6 @@ function Login() {
 
           <div className="mt-2 flex gap-3">
             <button
-              disabled={emailValid === false || passwordValid === false}
               type="submit"
               className="flex w-1/2 justify-center gap-1 rounded bg-blue-600 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
             >
