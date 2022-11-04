@@ -160,7 +160,7 @@ function Login() {
           </div>
           <p className="border-b-[1px]"></p>
 
-          <div className="flex gap-3">
+          <div className="mt-2 flex gap-3">
             <button
               disabled={emailValid === false || passwordValid === false}
               type="submit"
