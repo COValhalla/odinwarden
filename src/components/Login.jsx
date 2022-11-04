@@ -68,7 +68,7 @@ function Login() {
   }
 
   return (
-    <div className="mx-auto flex max-w-[481px] flex-col text-slate-900">
+    <div className="mx-auto flex max-w-[440px] flex-col text-slate-900">
       <div className="px-5 pb-4 pt-8">
         <h1 className="pb-1 text-center text-4xl">
           <span className="font-bold">Odin</span>warden
