@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 
 function Login() {
-  const [email, setEmail] = React.useState('')
-  const [emailValid, setEmailValid] = React.useState('')
-  const [emailError, setEmailError] = React.useState('')
+  const [email, setEmail] = useState('')
+  const [emailValid, setEmailValid] = useState('')
+  const [emailError, setEmailError] = useState('')
 
-  const [password, setPassword] = React.useState('')
-  const [passwordValid, setPasswordValid] = React.useState('')
-  const [passwordError, setPasswordError] = React.useState('')
-  const [passwordVisible, setPasswordVisible] = React.useState(false)
+  const [password, setPassword] = useState('')
+  const [passwordValid, setPasswordValid] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [passwordVisible, setPasswordVisible] = useState(false)
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
@@ -70,6 +70,7 @@ function Login() {
               <span className="font-bold">Email Address</span> (required)
             </label>
             <input
+              value={email}
               onChange={handleEmailChange}
               onBlur={checkEmailValidation}
               className="h-7 rounded border border-slate-400 px-2 py-1 text-sm"
@@ -89,6 +90,7 @@ function Login() {
             </label>
             <div className="flex">
               <input
+                value={password}
                 onChange={handlePasswordChange}
                 onBlur={checkPasswordValidation}
                 className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm"
