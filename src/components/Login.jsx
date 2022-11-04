@@ -69,7 +69,7 @@ function Login() {
   }
 
   return (
-    <div className="mx-auto flex max-w-[440px] flex-col text-slate-900">
+    <div className="mx-auto flex max-w-[440px] flex-col p-1 p-2 text-slate-900">
       <div className="px-5 pb-4 pt-8">
         <h1 className="pb-1 text-center text-4xl">
           <span className="font-bold">Odin</span>warden
@@ -181,7 +181,7 @@ function Login() {
           <div className="mt-2 flex gap-3">
             <button
               type="submit"
-              className="flex w-1/2 justify-center gap-1 rounded bg-blue-600 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
+              className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +203,7 @@ function Login() {
             <Link
               to="/register"
               type="button"
-              className="flex w-1/2 justify-center gap-1 rounded border bg-white py-[1px] text-center text-slate-600 transition duration-200 hover:bg-gray-500 hover:text-white "
+              className="max-w-1/2 flex justify-center gap-1 rounded border bg-white px-2 py-[1px] text-center text-slate-600 transition duration-200 hover:bg-gray-500 hover:text-white "
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

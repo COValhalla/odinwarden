@@ -108,7 +108,7 @@ function Register() {
   }
 
   return (
-    <div className="mx-auto flex max-w-[440px] flex-col text-slate-900">
+    <div className="mx-auto flex max-w-[440px] flex-col p-2 text-slate-900">
       <div className="px-5 pb-4 pt-8">
         <h1 className="pb-1 text-center">Create Account</h1>
       </div>
