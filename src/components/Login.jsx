@@ -54,8 +54,8 @@ function Login() {
   }
 
   const handleSubmit = (e) => {
+    e.preventDefault()
     if (emailValid && passwordValid) {
-      e.preventDefault()
       console.log('Submitted.')
     }
 
