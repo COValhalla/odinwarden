@@ -20,46 +20,47 @@ function PasswordStrengthMeter(props) {
   }
 
   const calculateWidth = (result) => {
+    const transitionStyle = { transition: 'width 0.5s ease-in-out' }
     switch (result.score) {
       case 0:
         return {
           width: '16%',
           backgroundColor: '#dd4b39',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
       case 1:
         return {
           width: '16%',
           backgroundColor: '#dd4b39',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
       case 2:
         return {
           width: '45%',
           backgroundColor: '#dd4b39',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
       case 3:
         return {
           width: '70%',
           backgroundColor: '#175ddc ',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
       case 4:
         return {
           width: '100%',
           backgroundColor: '#00a65a',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
       default:
         return {
           width: '16%',
           backgroundColor: '#ff0000',
-          transition: 'width 0.5s ease-in-out',
+          transition: transitionStyle,
         }
     }
   }
-  //   transition: 'width 0.5s ease-in-out',
+
   const testedResult = zxcvbn(props.password)
   return (
     <div className="w-full rounded-full bg-gray-200 dark:bg-gray-700">
