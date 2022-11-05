@@ -2,7 +2,7 @@
 
 A Bitwarden web vault clone built using MongoDB, Express.js, React.js, and Node.js.
 
-Live Version: TBD
+Live Version: https://odinwarden.netlify.app/login
 
 ## Authors
 
@@ -16,18 +16,9 @@ Live Version: TBD
 
 ## Todos
 
-- Login page
-- Email and Master Password
-- [Opt] Get master password hint
+- Login page & Register page submit to back-end
+- [Opt] Get master password hint feature
 - [Opt] Remember email for future logins
-- Login (basic form submit)
-- Create Account (route to register page)
-
-- Create Account page
-- Email, name, master password, password conf
-- Password/Password conf view toggle
-- Display for weak, good, strong password
-- Master password hint (optional)
 
 - Vaults
 - Filtering
