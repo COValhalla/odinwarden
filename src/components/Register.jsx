@@ -123,7 +123,7 @@ function Register() {
               onChange={handleEmailChange}
               onBlur={checkEmailValidation}
               value={email}
-              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm"
+              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
               type="email"
               name="email"
               id="email"
@@ -144,7 +144,7 @@ function Register() {
             <input
               onChange={handleNameChange}
               value={name}
-              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm"
+              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
               type="name"
               name="name"
               id="name"
@@ -161,7 +161,7 @@ function Register() {
                 value={password}
                 onChange={handlePasswordChange}
                 onBlur={checkPasswordValidation}
-                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm"
+                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
                 type={passwordVisible ? 'text' : 'password'}
                 name="password"
                 id="password"
@@ -224,7 +224,7 @@ function Register() {
             <div className="flex">
               <input
                 onBlur={handlePasswordConfBlur}
-                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm"
+                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
                 type={passwordVisible ? 'text' : 'password'}
                 name="passwordConf"
                 id="passwordConf"
@@ -281,7 +281,7 @@ function Register() {
               <input
                 value={passwordHint}
                 onChange={handleHintChange}
-                className="h-7 w-full rounded border border-slate-400 px-2 py-1 text-sm"
+                className="h-7 w-full rounded border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
                 type="text"
                 name="hint"
                 id="hint"

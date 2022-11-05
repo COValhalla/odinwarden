@@ -89,7 +89,7 @@ function Login() {
               value={email}
               onChange={handleEmailChange}
               onBlur={checkEmailValidation}
-              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm"
+              className="h-7 rounded border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
               type="email"
               name="email"
               id="email"
@@ -109,7 +109,7 @@ function Login() {
                 value={password}
                 onChange={handlePasswordChange}
                 onBlur={checkPasswordValidation}
-                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm"
+                className="h-7 w-full rounded-l border border-slate-400 px-2 py-1 text-sm focus:border-[2px] focus:border-blue-700 focus:outline-none"
                 type={passwordVisible ? 'text' : 'password'}
                 name="password"
                 id="password"
