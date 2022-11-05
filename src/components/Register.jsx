@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import PasswordStrengthMeter from './PasswordStrengthMeter'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -212,6 +213,7 @@ function Register() {
                 cannot be recovered if you forget it!
               </p>
             )}
+            <PasswordStrengthMeter password={password} />
           </div>
 
           <div className="flex flex-col gap-1">
