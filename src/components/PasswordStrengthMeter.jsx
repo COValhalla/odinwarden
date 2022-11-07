@@ -60,7 +60,7 @@ function PasswordStrengthMeter(props) {
       case 3:
         return {
           width: '45%',
-          backgroundColor: '#dd4b39',
+          backgroundColor: '#f6ad55',
           transition: transitionStyle,
         }
       case 4:
