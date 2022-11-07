@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter'
+import Footer from '../components/Footer'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -329,11 +330,7 @@ function Register() {
           </div>
         </form>
       </div>
-      <div>
-        <p className="pt-8 text-center text-sm text-slate-500">
-          © 2022 Odinwarden Inc.
-        </p>
-      </div>
+      <Footer />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
 
 function PasswordHint() {
   const [email, setEmail] = useState('')
@@ -94,11 +95,7 @@ function PasswordHint() {
           </div>
         </form>
       </div>
-      <div>
-        <p className="pt-8 text-center text-sm text-slate-500">
-          © 2022 Odinwarden Inc.
-        </p>
-      </div>
+      <Footer />
     </div>
   )
 }
