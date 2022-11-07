@@ -165,12 +165,14 @@ function Login() {
             )}
 
             {passwordError === '' && (
-              <Link
-                to="/hint"
-                className="text-sm text-blue-600 hover:underline"
-              >
-                Get master password hint.
-              </Link>
+              <div>
+                <Link
+                  to="/hint"
+                  className="text-sm text-blue-600 hover:underline"
+                >
+                  Get master password hint.
+                </Link>
+              </div>
             )}
           </div>
 
