@@ -114,7 +114,11 @@ function Register() {
         <h1 className="pb-1 text-center">Create Account</h1>
       </div>
       <div className="rounded border border-gray-300 bg-white p-5 shadow-inner">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4" action="">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4"
+          noValidate
+        >
           <div className="flex flex-col gap-1">
             <label className="text-xs" htmlFor="email">
               <span className="font-bold">Email Address</span> (required)
