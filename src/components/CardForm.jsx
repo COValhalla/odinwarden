@@ -2,7 +2,7 @@ import React from 'react'
 
 function CardForm({ closeModal }) {
   return (
-    <form className="flex flex-col  " action="">
+    <form className="flex flex-col text-xs sm:text-base " action="">
       <div className="flex gap-4 ">
         <div className="w-1/2">
           <div className="flex flex-col">

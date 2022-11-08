@@ -14,6 +14,7 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     padding: '10px',
+    width: '95%',
     maxWidth: '800px',
     maxHeight: '80%',
   },
@@ -54,7 +55,7 @@ function Vault() {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 text-xs sm:text-base">
           <header className="flex justify-between py-2">
             <h2>ADD ITEM</h2>
             <div>
