@@ -3,6 +3,7 @@ import React from 'react'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import PasswordHint from './pages/PasswordHint'
+import Vault from './pages/Vault'
 
 function RouteSwitch() {
   return (
@@ -12,6 +13,7 @@ function RouteSwitch() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/hint" element={<PasswordHint />} />
+        <Route path="/vault" element={<Vault />} />
       </Routes>
     </BrowserRouter>
   )
