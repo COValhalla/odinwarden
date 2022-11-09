@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 
 function Login() {
   const { login } = useAuth()
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState()
   const [emailValid, setEmailValid] = useState('')
   const [emailError, setEmailError] = useState('')
 
@@ -13,6 +13,13 @@ function Login() {
   const [passwordValid, setPasswordValid] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [passwordVisible, setPasswordVisible] = useState(false)
+
+  const [firstLoad, setFirstLoad] = useState(true)
+
+  if (firstLoad && localStorage.getItem('email')) {
+    setEmail(localStorage.getItem('email'))
+    setFirstLoad(false)
+  }
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
@@ -94,6 +101,13 @@ function Login() {
 
     if (!passwordValid) {
       checkPasswordValidation()
+    }
+  }
+
+  const handleRememberMe = () => {
+    // store the value of email in local storage
+    if (emailValid) {
+      localStorage.setItem('email', email)
     }
   }
 
@@ -205,6 +219,7 @@ function Login() {
 
           <div className="flex gap-2">
             <input
+              onClick={handleRememberMe}
               className="cursor-pointer"
               type="checkbox"
               name="remember"
