@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
+import { useAuth } from '../context/AuthContext'
 
 function Login() {
+  const { login } = useAuth()
   const [email, setEmail] = useState('')
   const [emailValid, setEmailValid] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -56,10 +58,34 @@ function Login() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid && passwordValid) {
-      console.log('Submitted.')
+      // Fetch request to login
+      if (emailValid && passwordValid) {
+        // POST fetch to backend api
+        const data = await fetch('http://localhost:3000/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+          }),
+        })
+
+        const response = await data.json()
+
+        if (response.status === 200) {
+          // Redirect to vault
+          login(response.token)
+        } else if (response.status === 400) {
+          // Display error message
+          setEmailError(response.message)
+          setEmailValid(false)
+        }
+      }
     }
 
     if (!emailValid) {

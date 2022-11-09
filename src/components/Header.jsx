@@ -3,18 +3,15 @@ import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { Link } from 'react-router-dom'
 import icon from '../assets/odin-lined.png'
+import { useAuth } from '../context/AuthContext'
 
 function Header() {
+  const { logout } = useAuth()
   const [path, setPath] = useState(window.location.pathname)
 
   useEffect(() => {
     setPath(window.location.pathname)
   }, [path])
-
-  function logOut() {
-    // Clear localStorage, route to login page
-    console.log('Logging out...')
-  }
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -96,7 +93,7 @@ function Header() {
                   <Menu.Item>
                     {({ active }) => (
                       <button
-                        onClick={logOut}
+                        onClick={logout}
                         type="submit"
                         className={classNames(
                           active

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter'
 import Footer from '../components/Footer'
 
@@ -20,6 +20,8 @@ function Register() {
   const [passwordConfError, setPasswordConfError] = useState('')
 
   const [passwordHint, setPasswordHint] = useState('')
+
+  const navigate = useNavigate()
 
   // Updates matching error if either password or passwordConf is changed
   useEffect(() => {
@@ -89,10 +91,38 @@ function Register() {
     setPasswordHint(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid && passwordValid && passwordConfValid) {
-      console.log('Form submitted.')
+      // POST fetch to backend api
+      const data = await fetch('http://localhost:3000/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          name,
+          password,
+          passwordHint,
+        }),
+      })
+
+      const response = await data.json()
+
+      if (response.status === 200) {
+        // Redirect to vault
+        navigate('/vault')
+
+        // Store JWT in localStorage
+        localStorage.setItem('token', response.token)
+      } else if (response.status === 400) {
+        // Display error message
+        console.log('400 Error')
+      } else if (response.status === 403) {
+        setEmailError('Email already in use.')
+        setEmailValid(false)
+      }
     }
 
     // Generate errors for all fields
