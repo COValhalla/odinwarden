@@ -29,10 +29,24 @@ function PasswordHint() {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid) {
-      console.log('Form submitted.')
+      const response = await fetch('http://localhost:3000/auth/hint', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+      const data = await response.json()
+      if (data.status === 200) {
+        setEmailError('Hint sent to your email address.')
+        setEmailValid(false)
+      } else {
+        setEmailError(data.error)
+        setEmailValid(false)
+      }
     }
 
     // Generate errors for all fields
