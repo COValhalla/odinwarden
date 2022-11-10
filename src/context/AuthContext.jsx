@@ -16,7 +16,7 @@ function AuthProvider({ children }) {
 
   const navigate = useNavigate()
 
-  async function fetchVerify() {
+  async function verifyJWTLocalStorage() {
     const response = await fetch('http://localhost:3000/auth/verify', {
       method: 'POST',
       headers: {
@@ -35,7 +35,7 @@ function AuthProvider({ children }) {
   }
 
   if (user !== null && firstLoad) {
-    fetchVerify()
+    verifyJWTLocalStorage()
     setFirstLoad(false)
   }
 
