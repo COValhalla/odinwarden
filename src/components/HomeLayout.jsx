@@ -3,10 +3,10 @@ import React from 'react'
 import { useAuth } from '../context/AuthContext'
 
 export function HomeLayout() {
-  const { user } = useAuth()
+  const { token } = useAuth()
   const outlet = useOutlet()
 
-  if (user) {
+  if (token) {
     return <Navigate to="/vault" />
   }
 
