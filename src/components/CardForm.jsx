@@ -1,8 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 function CardForm({ closeModal }) {
+  const { id } = useAuth()
+  const [name, setName] = useState('')
+  const [cardholdername, setCardholdername] = useState('')
+  const [brand, setBrand] = useState('')
+  const [cardnumber, setCardnumber] = useState('')
+  const [expirationMonth, setExpirationMonth] = useState('')
+  const [expirationYear, setExpirationYear] = useState('')
+  const [cvv, setCvv] = useState('')
+  const [note, setNote] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // POST data to server
+
+    const data = await fetch('http://localhost:3000/auth/add/card', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        cardholdername,
+        brand,
+        cardnumber,
+        expirationMonth,
+        expirationYear,
+        cvv,
+        note,
+        id,
+      }),
+    })
+
+    const response = await data.json()
+
+    if (response.status === 200) {
+      closeModal()
+    }
+  }
+
   return (
-    <form className="flex flex-col text-xs sm:text-base " action="">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col text-xs sm:text-base "
+      action=""
+    >
       <div className="flex gap-4 ">
         <div className="w-1/2">
           <div className="flex flex-col">
@@ -10,6 +54,7 @@ function CardForm({ closeModal }) {
               Name
             </label>
             <input
+              onChange={(e) => setName(e.target.value)}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="name"
@@ -22,6 +67,7 @@ function CardForm({ closeModal }) {
               Cardholder Name
             </label>
             <input
+              onChange={(e) => setCardholdername(e.target.value)}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="cardholdername"
@@ -34,6 +80,7 @@ function CardForm({ closeModal }) {
               Number
             </label>
             <input
+              onChange={(e) => setCardnumber(e.target.value)}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="number"
@@ -46,6 +93,7 @@ function CardForm({ closeModal }) {
               Security Code (CVV)
             </label>
             <input
+              onChange={(e) => setCvv(e.target.value)}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="securitycode"
@@ -54,11 +102,13 @@ function CardForm({ closeModal }) {
           </div>
         </div>
         <div className="w-1/2">
-          <div className="flex flex-col">
+          {/* Remove invisible when ready for folder feature. */}
+          <div className="invisible flex flex-col">
             <label className="py-1" htmlFor="folder">
               Folder
             </label>
             <select
+              onChange={(e) => setFolder(e.target.value)}
               className="h-8 w-full rounded border border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               name="folder"
               id="folder"
@@ -75,6 +125,7 @@ function CardForm({ closeModal }) {
               Brand
             </label>
             <select
+              onChange={(e) => setBrand(e.target.value)}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               name="brand"
               id="brand"
@@ -92,6 +143,7 @@ function CardForm({ closeModal }) {
                 Exp Month
               </label>
               <select
+                onChange={(e) => setExpirationMonth(e.target.value)}
                 className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
                 name="expmonth"
                 id="expmonth"
@@ -117,6 +169,7 @@ function CardForm({ closeModal }) {
                 Exp Year
               </label>
               <input
+                onChange={(e) => setExpirationYear(e.target.value)}
                 className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
                 type="number"
                 name="name"
@@ -132,6 +185,7 @@ function CardForm({ closeModal }) {
           Notes
         </label>
         <textarea
+          onChange={(e) => setNote(e.target.value)}
           className="h-24 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           name="notes"
           id="notes"

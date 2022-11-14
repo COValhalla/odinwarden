@@ -1,13 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useAuth } from '../context/AuthContext'
 
 function LoginForm({ closeModal }) {
+  const { id } = useAuth()
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [url, setUrl] = useState('')
+  const [note, setNote] = useState('')
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    // POST data to server
+
+    const data = await fetch('http://localhost:3000/auth/add/item', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, username, password, url, note, id }),
+    })
+
+    const response = await data.json()
+
+    if (response.status === 200) {
+      closeModal()
+    }
+  }
+
   return (
-    <form className="flex flex-col" action="">
+    <form onSubmit={handleSubmit} className="flex flex-col" action="">
       <div className="flex flex-col">
         <label className="py-1" htmlFor="name">
           Name
         </label>
         <input
+          onChange={(e) => setName(e.target.value)}
           className="w-1/2 rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           type="text"
           name="name"
@@ -20,6 +48,7 @@ function LoginForm({ closeModal }) {
             Username
           </label>
           <input
+            onChange={(e) => setUsername(e.target.value)}
             className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
             type="text"
             name="username"
@@ -31,6 +60,7 @@ function LoginForm({ closeModal }) {
             Password
           </label>
           <input
+            onChange={(e) => setPassword(e.target.value)}
             className=" w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
             type="text"
             name="password"
@@ -43,6 +73,7 @@ function LoginForm({ closeModal }) {
           URL
         </label>
         <input
+          onChange={(e) => setUrl(e.target.value)}
           className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           type="text"
           name="url"
@@ -51,6 +82,7 @@ function LoginForm({ closeModal }) {
 
         <label htmlFor="notes">Notes</label>
         <textarea
+          onChange={(e) => setNote(e.target.value)}
           className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           name="notes"
           id="notes"
