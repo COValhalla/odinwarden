@@ -43,6 +43,9 @@ function PasswordHint() {
       if (data.status === 200) {
         setEmailError('Hint sent to your email address.')
         setEmailValid(false)
+      } else if (data.status === 500) {
+        setEmailError('Something went wrong. Please try again.')
+        setEmailValid(false)
       } else {
         setEmailError(data.error)
         setEmailValid(false)
