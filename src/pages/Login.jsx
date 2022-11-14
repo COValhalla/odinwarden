@@ -86,7 +86,7 @@ function Login() {
 
         if (response.status === 200) {
           // Redirect to vault
-          login(response.token)
+          login(response)
         } else if (response.status === 400) {
           // Display error message
           setEmailError(response.message)
