@@ -47,7 +47,7 @@ function EditCardModal(props) {
         contentLabel="Example Modal"
       >
         <div className="flex flex-col gap-2 text-xs sm:text-base">
-          <header className="flex justify-between py-2">
+          <header className="sticky top-0 flex justify-between py-2">
             <h2>EDIT CARD</h2>
             <div>
               <svg
@@ -59,7 +59,7 @@ function EditCardModal(props) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6 cursor-pointer rounded hover:bg-slate-300"
+                className="h-6 w-6 cursor-pointer rounded transition hover:bg-slate-300"
               >
                 <path
                   strokeLinecap="round"

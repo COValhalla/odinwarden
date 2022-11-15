@@ -62,7 +62,7 @@ function AddItemModal(props) {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="h-6 w-6 cursor-pointer rounded hover:bg-slate-300"
+                className="h-6 w-6 cursor-pointer rounded transition hover:bg-slate-300"
               >
                 <path
                   strokeLinecap="round"
