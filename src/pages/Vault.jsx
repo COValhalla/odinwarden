@@ -130,7 +130,7 @@ function Vault() {
       </div>
       <p className=" mx-auto max-w-4xl border-b-[1.5px] border-slate-300"></p>
       {/* List all logins */}
-      <div>
+      <div className="mx-auto max-w-4xl">
         {logins.map((login) => (
           <div>
             <div
@@ -169,7 +169,7 @@ function Vault() {
         {cards.map((card) => (
           <div
             key={card.id}
-            className="mx-2 flex items-center justify-between p-2"
+            className="mx-2  flex items-center justify-between p-2"
           >
             <div className="flex flex-col">
               <button
