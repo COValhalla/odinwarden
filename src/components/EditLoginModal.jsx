@@ -72,6 +72,7 @@ function EditLoginModal(props) {
           </header>
           <p className="border-b-[1px]"></p>
           <LoginForm
+            type="edit"
             data={props.selectedLogin}
             closeModal={() => {
               onModalClose()

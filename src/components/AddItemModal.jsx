@@ -95,7 +95,13 @@ function AddItemModal(props) {
               }}
             />
           ) : (
-            <CardForm data={null} closeModal={onModalClose} />
+            <CardForm
+              type="new"
+              data={null}
+              closeModal={() => {
+                onModalClose()
+              }}
+            />
           )}
         </div>
       </Modal>

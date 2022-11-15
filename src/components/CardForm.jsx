@@ -1,8 +1,8 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
 
 function CardForm(props) {
-  const { id } = useAuth()
   const [name, setName] = useState(props.data?.name || '')
   const [cardholdername, setCardholdername] = useState(
     props.data?.cardholderName || '',
@@ -17,6 +17,8 @@ function CardForm(props) {
   )
   const [cvv, setCvv] = useState(props.data?.cvv || '')
   const [note, setNote] = useState(props.data?.note || '')
+
+  const [type, setType] = useState(props.type)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -47,12 +49,38 @@ function CardForm(props) {
     }
   }
 
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    // POST data to server
+
+    const data = await fetch('http://localhost:3000/auth/update/card', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        cardholdername,
+        brand,
+        cardnumber,
+        expirationMonth,
+        expirationYear,
+        cvv,
+        note,
+        userId: localStorage.getItem('id'),
+        itemId: props.data?._id,
+      }),
+    })
+
+    const response = await data.json()
+
+    if (response.status === 200) {
+      props.closeModal()
+    }
+  }
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex flex-col text-xs sm:text-base "
-      action=""
-    >
+    <form className="flex flex-col text-xs sm:text-base " action="">
       <div className="flex gap-4 ">
         <div className="w-1/2">
           <div className="flex flex-col">
@@ -206,12 +234,23 @@ function CardForm(props) {
         ></textarea>
       </div>
       <div className="flex gap-2">
-        <button
-          type="submit"
-          className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
-        >
-          Save
-        </button>
+        {type === 'new' ? (
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            onClick={handleUpdate}
+            type="button"
+            className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
+          >
+            Update
+          </button>
+        )}
 
         <button
           onClick={props.closeModal}

@@ -71,6 +71,7 @@ function EditCardModal(props) {
           </header>
           <p className="border-b-[1px]"></p>
           <CardForm
+            type="edit"
             data={props.selectedCard}
             closeModal={() => {
               onModalClose()

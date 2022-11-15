@@ -1,13 +1,16 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
 function LoginForm(props) {
-  const { id } = useAuth()
   const [name, setName] = useState(props.data?.name || '')
   const [username, setUsername] = useState(props.data?.username || '')
   const [password, setPassword] = useState(props.data?.password || '')
   const [url, setUrl] = useState(props.data?.url[0] || '')
   const [note, setNote] = useState(props.data?.note || '')
+
+  const [type, setType] = useState(props.type)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,8 +38,34 @@ function LoginForm(props) {
     }
   }
 
+  const handleUpdate = async (e) => {
+    e.preventDefault()
+    // POST data to server
+
+    const data = await fetch('http://localhost:3000/auth/update/item', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        username,
+        password,
+        url,
+        note,
+        userId: localStorage.getItem('id'),
+        itemId: props.data?._id,
+      }),
+    })
+
+    const response = await data.json()
+
+    if (response.status === 200) {
+      props.closeModal()
+    }
+  }
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col" action="">
+    <form className="flex flex-col" action="">
       <div className="flex flex-col">
         <label className="py-1" htmlFor="name">
           Name
@@ -103,13 +132,23 @@ function LoginForm(props) {
         ></textarea>
       </div>
       <div className="flex gap-2">
-        <button
-          type="submit"
-          className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
-        >
-          Save
-        </button>
-
+        {type === 'new' ? (
+          <button
+            onClick={handleSubmit}
+            type="submit"
+            className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
+          >
+            Save
+          </button>
+        ) : (
+          <button
+            onClick={handleUpdate}
+            type="submit"
+            className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
+          >
+            Update
+          </button>
+        )}
         <button
           onClick={props.closeModal}
           type="button"
