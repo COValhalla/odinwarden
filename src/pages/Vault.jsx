@@ -3,6 +3,7 @@ import Modal from 'react-modal'
 import Header from '../components/Header'
 import AddItemModal from '../components/AddItemModal'
 import EditCardModal from '../components/EditCardModal'
+import EditLoginModal from '../components/EditLoginModal'
 
 Modal.setAppElement('#root')
 
@@ -38,9 +39,26 @@ function Vault() {
     setEditCardModalIsOpen(false)
   }, [])
 
+  // EditLoginModal state and functions
+  const [editLoginModalIsOpen, setEditLoginModalIsOpen] = useState(false)
+
+  function openEditLoginModal(login) {
+    setSelectedLogin(login)
+    setEditLoginModalIsOpen(true)
+  }
+
+  const afterOpenEditLoginModal = useCallback((event) => {
+    console.log(event)
+  }, [])
+
+  const handleCloseEditLoginModal = useCallback(() => {
+    setEditLoginModalIsOpen(false)
+  }, [])
+
   // Data state management
   const [cards, setCards] = useState([])
   const [selectedCard, setSelectedCard] = useState(null)
+  const [selectedLogin, setSelectedLogin] = useState(null)
   const [logins, setLogins] = useState([])
 
   // Fetch logins and cards on mount
@@ -76,6 +94,13 @@ function Vault() {
         onCloseModal={handleCloseEditCardModal}
         onAfterOpen={afterOpenEditCardModal}
         selectedCard={selectedCard}
+      />
+
+      <EditLoginModal
+        isModalOpened={editLoginModalIsOpen}
+        onCloseModal={handleCloseEditLoginModal}
+        onAfterOpen={afterOpenEditLoginModal}
+        selectedLogin={selectedLogin}
       />
 
       <Header />
@@ -114,7 +139,7 @@ function Vault() {
             >
               <div className="flex flex-col">
                 <button
-                  // onClick={openEditCardModal}
+                  onClick={() => openEditLoginModal(login)}
                   type="button"
                   className="text-left text-sm text-[#175ddc] hover:underline"
                 >

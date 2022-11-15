@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
-function LoginForm({ closeModal }) {
+function LoginForm(props) {
   const { id } = useAuth()
-  const [name, setName] = useState('')
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [url, setUrl] = useState('')
-  const [note, setNote] = useState('')
+  const [name, setName] = useState(props.data?.name || '')
+  const [username, setUsername] = useState(props.data?.username || '')
+  const [password, setPassword] = useState(props.data?.password || '')
+  const [url, setUrl] = useState(props.data?.url[0] || '')
+  const [note, setNote] = useState(props.data?.note || '')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,13 +18,20 @@ function LoginForm({ closeModal }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ name, username, password, url, note, id }),
+      body: JSON.stringify({
+        name,
+        username,
+        password,
+        url,
+        note,
+        id: localStorage.getItem('id'),
+      }),
     })
 
     const response = await data.json()
 
     if (response.status === 200) {
-      closeModal()
+      props.closeModal()
     }
   }
 
@@ -36,6 +43,7 @@ function LoginForm({ closeModal }) {
         </label>
         <input
           onChange={(e) => setName(e.target.value)}
+          value={name}
           className="w-1/2 rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           type="text"
           name="name"
@@ -49,6 +57,7 @@ function LoginForm({ closeModal }) {
           </label>
           <input
             onChange={(e) => setUsername(e.target.value)}
+            value={username}
             className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
             type="text"
             name="username"
@@ -61,6 +70,7 @@ function LoginForm({ closeModal }) {
           </label>
           <input
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
             className=" w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
             type="text"
             name="password"
@@ -74,6 +84,7 @@ function LoginForm({ closeModal }) {
         </label>
         <input
           onChange={(e) => setUrl(e.target.value)}
+          value={url}
           className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           type="text"
           name="url"
@@ -83,6 +94,7 @@ function LoginForm({ closeModal }) {
         <label htmlFor="notes">Notes</label>
         <textarea
           onChange={(e) => setNote(e.target.value)}
+          value={note}
           className="w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           name="notes"
           id="notes"
@@ -99,7 +111,7 @@ function LoginForm({ closeModal }) {
         </button>
 
         <button
-          onClick={closeModal}
+          onClick={props.closeModal}
           type="button"
           className="mt-2 rounded border bg-white px-2 py-[2px] text-gray-500 hover:bg-gray-200"
         >
