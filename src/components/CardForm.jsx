@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
-function CardForm({ closeModal }) {
+function CardForm(props, { closeModal }) {
   const { id } = useAuth()
-  const [name, setName] = useState('')
-  const [cardholdername, setCardholdername] = useState('')
-  const [brand, setBrand] = useState('')
-  const [cardnumber, setCardnumber] = useState('')
-  const [expirationMonth, setExpirationMonth] = useState('')
-  const [expirationYear, setExpirationYear] = useState('')
-  const [cvv, setCvv] = useState('')
-  const [note, setNote] = useState('')
+  const [name, setName] = useState(props.data?.name || '')
+  const [cardholdername, setCardholdername] = useState(
+    props.data?.cardholderName || '',
+  )
+  const [brand, setBrand] = useState(props.data?.brand || '')
+  const [cardnumber, setCardnumber] = useState(props.data?.cardNumber || '')
+  const [expirationMonth, setExpirationMonth] = useState(
+    props.data?.expirationMonth || '',
+  )
+  const [expirationYear, setExpirationYear] = useState(
+    props.data?.expirationYear || '',
+  )
+  const [cvv, setCvv] = useState(props.data?.cvv || '')
+  const [note, setNote] = useState(props.data?.note || '')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -30,7 +36,7 @@ function CardForm({ closeModal }) {
         expirationYear,
         cvv,
         note,
-        id,
+        id: localStorage.getItem('id'),
       }),
     })
 
@@ -55,6 +61,7 @@ function CardForm({ closeModal }) {
             </label>
             <input
               onChange={(e) => setName(e.target.value)}
+              value={name}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="name"
@@ -68,6 +75,7 @@ function CardForm({ closeModal }) {
             </label>
             <input
               onChange={(e) => setCardholdername(e.target.value)}
+              value={cardholdername}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="cardholdername"
@@ -81,6 +89,7 @@ function CardForm({ closeModal }) {
             </label>
             <input
               onChange={(e) => setCardnumber(e.target.value)}
+              value={cardnumber}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="number"
@@ -94,6 +103,7 @@ function CardForm({ closeModal }) {
             </label>
             <input
               onChange={(e) => setCvv(e.target.value)}
+              value={cvv}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               type="text"
               name="securitycode"
@@ -126,15 +136,16 @@ function CardForm({ closeModal }) {
             </label>
             <select
               onChange={(e) => setBrand(e.target.value)}
+              value={brand}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
               name="brand"
               id="brand"
             >
               <option value="select">- Select -</option>
-              <option value="visa">Visa</option>
-              <option value="mastercard">Mastercard</option>
-              <option value="americanexpress">American Express</option>
-              <option value="discover">Discover</option>
+              <option value="Visa">Visa</option>
+              <option value="Mastercard">Mastercard</option>
+              <option value="American Express">American Express</option>
+              <option value="Discover">Discover</option>
             </select>
           </div>
           <div className="flex gap-2">
@@ -144,23 +155,24 @@ function CardForm({ closeModal }) {
               </label>
               <select
                 onChange={(e) => setExpirationMonth(e.target.value)}
+                value={expirationMonth}
                 className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
                 name="expmonth"
                 id="expmonth"
               >
                 <option value="select">- Select -</option>
-                <option value="january">01 - January</option>
-                <option value="february">02 - February</option>
-                <option value="march">03 - March</option>
-                <option value="april">04 - April</option>
-                <option value="may">05 - May</option>
-                <option value="june">06 - June</option>
-                <option value="july">07 - July</option>
-                <option value="august">08 - August</option>
-                <option value="september">09 - September</option>
-                <option value="october">10 - October</option>
-                <option value="november">11 - November</option>
-                <option value="december">12 - December</option>
+                <option value="01">01 - January</option>
+                <option value="02">02 - February</option>
+                <option value="03">03 - March</option>
+                <option value="04">04 - April</option>
+                <option value="05">05 - May</option>
+                <option value="06">06 - June</option>
+                <option value="07">07 - July</option>
+                <option value="08">08 - August</option>
+                <option value="09">09 - September</option>
+                <option value="10">10 - October</option>
+                <option value="11">11 - November</option>
+                <option value="12">12 - December</option>
               </select>
             </div>
 
@@ -170,6 +182,7 @@ function CardForm({ closeModal }) {
               </label>
               <input
                 onChange={(e) => setExpirationYear(e.target.value)}
+                value={expirationYear}
                 className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
                 type="number"
                 name="name"
@@ -186,6 +199,7 @@ function CardForm({ closeModal }) {
         </label>
         <textarea
           onChange={(e) => setNote(e.target.value)}
+          value={note}
           className="h-24 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
           name="notes"
           id="notes"

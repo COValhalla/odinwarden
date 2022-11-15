@@ -1,110 +1,88 @@
-import React, { useState, useCallback } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState, useCallback, useEffect } from 'react'
 import Modal from 'react-modal'
 import Header from '../components/Header'
-import LoginForm from '../components/LoginForm'
-import CardForm from '../components/CardForm'
-
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: '10px',
-    width: '95%',
-    maxWidth: '800px',
-    maxHeight: '80%',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-  },
-}
+import AddItemModal from '../components/AddItemModal'
+import EditCardModal from '../components/EditCardModal'
 
 Modal.setAppElement('#root')
 
 function Vault() {
-  // Modal state and functions
-  let subtitle
-  const [modalIsOpen, setIsOpen] = useState(false)
-  function openModal() {
-    setIsOpen(true)
+  // AddItemModal state and functions
+  const [addModalIsOpen, setAddModalIsOpen] = useState(false)
+
+  function openAddModal() {
+    setAddModalIsOpen(true)
   }
-  function afterOpenModal() {
-    subtitle.style.color = '#f00'
-  }
-  const closeModal = useCallback(() => {
-    setIsOpen(false)
+
+  const afterOpenAddModal = useCallback((event) => {
+    console.log(event)
   }, [])
 
-  // Form state management
-  const [type, setType] = useState('login')
+  const handleCloseAddModal = useCallback(() => {
+    setAddModalIsOpen(false)
+  }, [])
+
+  // EditCardModal state and functions
+  const [editCardModalIsOpen, setEditCardModalIsOpen] = useState(false)
+
+  function openEditCardModal(card) {
+    setSelectedCard(card)
+    setEditCardModalIsOpen(true)
+  }
+
+  const afterOpenEditCardModal = useCallback((event) => {
+    console.log(event)
+  }, [])
+
+  const handleCloseEditCardModal = useCallback(() => {
+    setEditCardModalIsOpen(false)
+  }, [])
+
+  // Data state management
+  const [cards, setCards] = useState([])
+  const [selectedCard, setSelectedCard] = useState(null)
+  const [logins, setLogins] = useState([])
+
+  // Fetch logins and cards on mount
+  useEffect(() => {
+    async function asyncFetch() {
+      const response = await fetch('http://localhost:3000/auth/get-items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          id: localStorage.getItem('id'),
+        }),
+      })
+
+      const data = await response.json()
+      setCards(data.cards)
+      setLogins(data.logins)
+    }
+    asyncFetch()
+  }, [])
 
   return (
     <div>
-      <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={() => {
-          afterOpenModal()
-        }}
-        onRequestClose={() => {
-          closeModal()
-        }}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
-        <div className="flex flex-col gap-2 text-xs sm:text-base">
-          <header className="flex justify-between py-2">
-            <h2>ADD ITEM</h2>
-            <div>
-              <svg
-                onClick={closeModal}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-6 cursor-pointer rounded hover:bg-slate-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-          </header>
-          <p className="border-b-[1px]"></p>
-          <div className="flex flex-col">
-            <label className="py-1" htmlFor="type">
-              What type of item is this?
-            </label>
-            <select
-              onChange={(e) => setType(e.target.value)}
-              id="type"
-              name="type"
-              className="h-8 w-1/2 rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500 sm:w-1/4"
-            >
-              <option value="login">Login</option>
-              <option value="card">Card</option>
-            </select>
-          </div>
+      <AddItemModal
+        isModalOpened={addModalIsOpen}
+        onCloseModal={handleCloseAddModal}
+        onAfterOpen={afterOpenAddModal}
+      />
 
-          {type === 'login' ? (
-            <LoginForm closeModal={closeModal} />
-          ) : (
-            <CardForm closeModal={closeModal} />
-          )}
-        </div>
-      </Modal>
+      <EditCardModal
+        isModalOpened={editCardModalIsOpen}
+        onCloseModal={handleCloseEditCardModal}
+        onAfterOpen={afterOpenEditCardModal}
+        selectedCard={selectedCard}
+      />
 
       <Header />
       <div className="my-3 mx-auto flex max-w-4xl justify-between px-3">
         <h1 className="text-xl text-slate-700">Vault Items</h1>
         <button
-          onClick={openModal}
+          onClick={openAddModal}
           type="button"
           className="flex self-center rounded-sm border border-slate-300 px-1 py-[2px] text-xs text-[#175ddc] transition duration-200 hover:bg-[#175ddc] hover:text-white"
         >
@@ -125,7 +103,80 @@ function Vault() {
           Add Item
         </button>
       </div>
-      <p className=" mx-auto max-w-4xl border-b-[1px] border-slate-300"></p>
+      <p className=" mx-auto max-w-4xl border-b-[1.5px] border-slate-300"></p>
+      {/* List all logins */}
+      <div>
+        {logins.map((login) => (
+          <div>
+            <div
+              key={login.id}
+              className="mx-2 flex items-center justify-between p-2"
+            >
+              <div className="flex flex-col">
+                <button
+                  // onClick={openEditCardModal}
+                  type="button"
+                  className="text-left text-sm text-[#175ddc] hover:underline"
+                >
+                  {login.name}
+                </button>
+                <p className="text-xs text-gray-500">{login.username}</p>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+                />
+              </svg>
+            </div>
+            <p className=" mx-auto max-w-4xl border-b-[1px] border-slate-300"></p>
+          </div>
+        ))}
+        {/* List all cards */}
+        {cards.map((card) => (
+          <div
+            key={card.id}
+            className="mx-2 flex items-center justify-between p-2"
+          >
+            <div className="flex flex-col">
+              <button
+                onClick={() => {
+                  openEditCardModal(card)
+                }}
+                type="button"
+                className="text-left text-sm text-[#175ddc] hover:underline"
+              >
+                {card.name}
+              </button>
+              <p className="text-xs text-gray-500">
+                {card.brand}, *{card.cardNumber.slice(-4)}
+              </p>
+            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z"
+              />
+            </svg>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

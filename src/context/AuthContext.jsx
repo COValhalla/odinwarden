@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, {
   useCallback,
   createContext,
@@ -12,7 +13,8 @@ const AuthContext = createContext()
 
 function AuthProvider({ children }) {
   const [firstLoad, setFirstLoad] = useState(true)
-  const [user, setUser] = useLocalStorage('user', null)
+  const [token, setToken] = useLocalStorage('token', null)
+  const [id, setId] = useState('')
 
   const navigate = useNavigate()
 
@@ -27,42 +29,49 @@ function AuthProvider({ children }) {
       }),
     })
     const data = await response.json()
+
     if (data.status === 200) {
+      setId(data.decoded.id)
       navigate('/vault')
     } else {
       navigate('/login')
     }
   }
 
-  if (user !== null && firstLoad) {
+  if (token !== null && firstLoad) {
     verifyJWTLocalStorage()
     setFirstLoad(false)
   }
 
-  // call this function when you want to authenticate the user
+  // call this function when you want to authenticate the token
   const login = useCallback(
-    async (data) => {
-      localStorage.setItem('token', data)
-      setUser(data)
+    async (response) => {
+      localStorage.setItem('token', response.token)
+      localStorage.setItem('id', response.user._id)
+      setToken(response.token)
+      setId(response.user._id)
       navigate('/vault')
     },
-    [navigate, setUser],
+    [navigate, setToken],
   )
 
-  // call this function to sign out logged in user
+  // call this function to sign out logged in token
   const logout = useCallback(() => {
     localStorage.removeItem('token')
-    setUser(null)
+    localStorage.removeItem('id')
+    setToken(null)
+    setId('')
     navigate('/login', { replace: true })
-  }, [navigate, setUser])
+  }, [navigate, setToken])
 
   const value = useMemo(
     () => ({
-      user,
+      token,
+      id,
       login,
       logout,
     }),
-    [user, login, logout],
+    [token, id, login, logout],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
