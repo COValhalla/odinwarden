@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 
-function CardForm(props, { closeModal }) {
+function CardForm(props) {
   const { id } = useAuth()
   const [name, setName] = useState(props.data?.name || '')
   const [cardholdername, setCardholdername] = useState(
@@ -43,7 +43,7 @@ function CardForm(props, { closeModal }) {
     const response = await data.json()
 
     if (response.status === 200) {
-      closeModal()
+      props.closeModal()
     }
   }
 
@@ -214,7 +214,7 @@ function CardForm(props, { closeModal }) {
         </button>
 
         <button
-          onClick={closeModal}
+          onClick={props.closeModal}
           type="button"
           className="mt-2 rounded border bg-white px-2 py-[2px] text-gray-500 hover:bg-gray-200"
         >

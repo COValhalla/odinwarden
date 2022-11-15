@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React from 'react'
 import Modal from 'react-modal'
 import CardForm from './CardForm'
 
@@ -70,7 +70,12 @@ function EditCardModal(props) {
             </div>
           </header>
           <p className="border-b-[1px]"></p>
-          <CardForm data={props.selectedCard} closeModal={onModalClose} />
+          <CardForm
+            data={props.selectedCard}
+            closeModal={() => {
+              onModalClose()
+            }}
+          />
         </div>
       </Modal>
     </div>
