@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { useAuth } from '../context/AuthContext'
 
 function Login() {
   const { login } = useAuth()
-  const [email, setEmail] = useState()
+  const [email, setEmail] = useState('')
   const [emailValid, setEmailValid] = useState('')
   const [emailError, setEmailError] = useState('')
 
@@ -15,8 +15,9 @@ function Login() {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   const [firstLoad, setFirstLoad] = useState(true)
+  const [checked, setChecked] = useState(false)
 
-  if (firstLoad && localStorage.getItem('email')) {
+  if (firstLoad && localStorage.getItem('email') !== 'null') {
     setEmail(localStorage.getItem('email'))
     setFirstLoad(false)
   }
@@ -104,10 +105,20 @@ function Login() {
     }
   }
 
+  // If email in localStorage, set checkbox to true
+  useEffect(() => {
+    if (localStorage.getItem('email') !== 'null') {
+      setChecked(true)
+    }
+  }, [emailValid])
+
   const handleRememberMe = () => {
-    // store the value of email in local storage
-    if (emailValid) {
+    if (!checked) {
       localStorage.setItem('email', email)
+      setChecked(true)
+    } else {
+      localStorage.setItem('email', null)
+      setChecked(false)
     }
   }
 
@@ -219,7 +230,8 @@ function Login() {
 
           <div className="flex gap-2">
             <input
-              onClick={handleRememberMe}
+              checked={checked}
+              onChange={handleRememberMe}
               className="cursor-pointer"
               type="checkbox"
               name="remember"
