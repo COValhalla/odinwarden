@@ -24,7 +24,6 @@ const customStyles = {
 Modal.setAppElement('#root')
 
 function EditLoginModal(props) {
-  console.log('Ping: ', props)
   // Modal state and functions
   function afterOpenAddModal(e) {
     props.onAfterOpen(e)

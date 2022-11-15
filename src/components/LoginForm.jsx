@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react'
-import { useAuth } from '../context/AuthContext'
+import DeleteModal from './DeleteModal'
 
 function LoginForm(props) {
   const [name, setName] = useState(props.data?.name || '')
@@ -11,6 +11,18 @@ function LoginForm(props) {
   const [note, setNote] = useState(props.data?.note || '')
 
   const [type, setType] = useState(props.type)
+
+  // Delete modal
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
+  function openDeleteModal() {
+    setDeleteModalIsOpen(true)
+  }
+  function handleCloseDeleteModal(e, result) {
+    if (result === 'Yes') {
+      handleDelete()
+    }
+    setDeleteModalIsOpen(false)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -64,8 +76,36 @@ function LoginForm(props) {
       props.closeModal()
     }
   }
+
+  const handleDelete = async () => {
+    console.log('Clicked delete')
+    // DELETE data to server
+    const data = await fetch('http://localhost:3000/auth/delete/item', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: localStorage.getItem('id'),
+        itemId: props.data?._id,
+      }),
+    })
+
+    const response = await data.json()
+
+    if (response.status === 200) {
+      props.closeModal()
+    }
+  }
+
   return (
     <form className="flex flex-col" action="">
+      <DeleteModal
+        isModalOpened={deleteModalIsOpen}
+        onCloseModal={(e, result) => {
+          handleCloseDeleteModal(e, result)
+        }}
+      />
       <div className="flex flex-col">
         <label className="py-1" htmlFor="name">
           Name
@@ -159,8 +199,9 @@ function LoginForm(props) {
           </button>
         </div>
         {type === 'edit' && (
+          // Delete button
           <button
-            onClick={props.closeModal}
+            onClick={openDeleteModal}
             type="button"
             className="mt-2 rounded border bg-white px-2 py-[2px] text-red-500 transition hover:bg-red-500 hover:text-white"
           >
