@@ -90,6 +90,7 @@ function AddItemModal(props) {
 
           {type === 'login' ? (
             <LoginForm
+              type="new"
               closeModal={() => {
                 onModalClose()
               }}

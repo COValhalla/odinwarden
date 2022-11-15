@@ -78,7 +78,6 @@ function LoginForm(props) {
   }
 
   const handleDelete = async () => {
-    console.log('Clicked delete')
     // DELETE data to server
     const data = await fetch('http://localhost:3000/auth/delete/item', {
       method: 'DELETE',
