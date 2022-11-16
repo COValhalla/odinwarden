@@ -148,7 +148,7 @@ function Lock() {
               <p className="text-xs text-red-500">{passwordError}</p>
             )}
             <p className="text-xs text-slate-400">
-              Logged in as {localStorage.getItem('email')} on odinwarden.com.
+              Logged in as {localStorage.getItem('email')} on Odinwarden
             </p>
           </div>
 
