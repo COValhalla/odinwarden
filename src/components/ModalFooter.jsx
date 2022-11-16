@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ModalFooter({
   type,
-  handleSubmit,
+  onSubmit,
   onUpdate,
   openDeleteModal,
   closeModal,
@@ -13,8 +13,8 @@ export default function ModalFooter({
       <div className="flex gap-2">
         {type === 'new' ? (
           <button
-            onClick={handleSubmit}
-            type="submit"
+            onClick={onSubmit}
+            type="button"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
           >
             Save
@@ -22,7 +22,7 @@ export default function ModalFooter({
         ) : (
           <button
             onClick={onUpdate}
-            type="submit"
+            type="button"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white transition hover:bg-blue-700"
           >
             Update
