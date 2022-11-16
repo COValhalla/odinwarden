@@ -16,6 +16,7 @@ Live Version: https://odinwarden.netlify.app/login
 
 ## Todos
 
+- Form validation and URL launch
 - Hash all data on server (currently only password)
 - Multi-item selection
 - Vault items filter
