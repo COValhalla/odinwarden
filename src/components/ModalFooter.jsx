@@ -1,19 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
 
-export default function ModalFooter({
-  type,
-  onSubmit,
-  onUpdate,
-  onDelete,
-  closeModal,
-}) {
+export default function ModalFooter({ type, onUpdate, onDelete, closeModal }) {
   return (
     <div className="flex justify-between">
       <div className="flex gap-2">
         {type === 'new' ? (
           <button
-            onSubmit={onSubmit}
             type="submit"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
           >
@@ -21,8 +14,8 @@ export default function ModalFooter({
           </button>
         ) : (
           <button
-            onSubmit={onUpdate}
-            type="submit"
+            onClick={onUpdate}
+            type="button"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white transition hover:bg-blue-700"
           >
             Update

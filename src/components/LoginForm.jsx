@@ -102,7 +102,7 @@ function LoginForm(props) {
   }
 
   return (
-    <form className="flex flex-col" action="">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <DeleteModal
         isModalOpened={deleteModalIsOpen}
         onCloseModal={(e, result) => {
@@ -177,7 +177,6 @@ function LoginForm(props) {
       </div>
       <ModalFooter
         type={type}
-        onSubmit={handleSubmit}
         onUpdate={handleUpdate}
         onDelete={openDeleteModal}
         closeModal={props.closeModal}

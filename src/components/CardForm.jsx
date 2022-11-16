@@ -116,7 +116,10 @@ function CardForm(props) {
   }
 
   return (
-    <form className="flex flex-col text-xs sm:text-base">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col text-xs sm:text-base"
+    >
       <DeleteModal
         isModalOpened={deleteModalIsOpen}
         onCloseModal={(e, result) => {
@@ -277,9 +280,7 @@ function CardForm(props) {
         ></textarea>
       </div>
       <ModalFooter
-        type={type}
-        onSubmit={handleSubmit}
-        onUpdate={handleUpdate}
+        type={type}        onUpdate={handleUpdate}
         onDelete={openDeleteModal}
         closeModal={props.closeModal}
       />
