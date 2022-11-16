@@ -31,6 +31,7 @@ function AddItemModal(props) {
 
   function onModalClose(e) {
     props.onCloseModal(e)
+    setType('login')
   }
   // Form state management
   const [type, setType] = useState('login')
