@@ -71,7 +71,7 @@ function Lock() {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="h-12 w-12"
+          className="h-12 w-12 text-slate-500"
         >
           <path
             strokeLinecap="round"
