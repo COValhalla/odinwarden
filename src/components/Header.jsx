@@ -87,8 +87,35 @@ function Header() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-32 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="absolute right-0 z-10 mt-2 origin-top-right rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               <div className="py-1">
+                <Menu.Item>
+                  {({ active }) => (
+                    <div>
+                      <span
+                        className={classNames(
+                          active
+                            ? 'bg-gray-200 text-gray-900'
+                            : 'text-gray-700',
+                          'block w-full px-4 pt-2 text-left text-xs',
+                        )}
+                      >
+                        Logged in as
+                      </span>
+                      <span
+                        className={classNames(
+                          active
+                            ? 'bg-gray-200 text-gray-900'
+                            : 'text-gray-700',
+                          'block w-full border-b-[1px] px-4 pb-2 text-left text-[14px] text-opacity-80',
+                        )}
+                      >
+                        {' '}
+                        {localStorage.getItem('email')}
+                      </span>
+                    </div>
+                  )}
+                </Menu.Item>
                 <form method="POST" action="#">
                   <Menu.Item>
                     {({ active }) => (
