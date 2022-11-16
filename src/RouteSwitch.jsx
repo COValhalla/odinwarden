@@ -4,8 +4,8 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import PasswordHint from './pages/PasswordHint'
 import Vault from './pages/Vault'
+import Lock from './pages/Lock'
 import { ProtectedLayout } from './components/ProtectedLayout'
-import { HomeLayout } from './components/HomeLayout'
 import { AuthProvider } from './context/AuthContext'
 
 function RouteSwitch() {
@@ -13,14 +13,13 @@ function RouteSwitch() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route element={<HomeLayout />}>
-            <Route path="*" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/hint" element={<PasswordHint />} />
-          </Route>
+          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/hint" element={<PasswordHint />} />
           <Route element={<ProtectedLayout />}>
             <Route path="/vault" element={<Vault />} />
+            <Route path="/lock" element={<Lock />} />
           </Route>
         </Routes>
       </AuthProvider>

@@ -5,64 +5,50 @@ import React, {
   useContext,
   useMemo,
   useState,
+  useEffect,
 } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const AuthContext = createContext()
 
 function AuthProvider({ children }) {
   const [firstLoad, setFirstLoad] = useState(true)
-  const [token, setToken] = useLocalStorage('token', null)
   const [id, setId] = useState('')
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [email, setEmail] = useState(localStorage.getItem('email'))
 
   const navigate = useNavigate()
 
-  async function verifyJWTLocalStorage() {
-    const response = await fetch('http://localhost:3000/auth/verify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem('token'),
-      }),
-    })
-    const data = await response.json()
-
-    if (data.status === 200) {
-      setId(data.decoded.id)
-      navigate('/vault')
-    } else {
-      navigate('/login')
+  useEffect(() => {
+    if (firstLoad) {
+      setFirstLoad(false)
     }
-  }
-
-  if (token !== null && firstLoad) {
-    verifyJWTLocalStorage()
-    setFirstLoad(false)
-  }
+  }, [firstLoad, setFirstLoad])
 
   // call this function when you want to authenticate the token
   const login = useCallback(
     async (response) => {
       localStorage.setItem('token', response.token)
       localStorage.setItem('id', response.user._id)
+      localStorage.setItem('email', response.user.email)
       setToken(response.token)
       setId(response.user._id)
+      setEmail(response.user.email)
       navigate('/vault')
     },
-    [navigate, setToken],
+    [navigate, setToken, setEmail],
   )
 
   // call this function to sign out logged in token
   const logout = useCallback(() => {
     localStorage.removeItem('token')
     localStorage.removeItem('id')
+    localStorage.removeItem('email')
     setToken(null)
     setId('')
+    setEmail(null)
     navigate('/login', { replace: true })
-  }, [navigate, setToken])
+  }, [navigate, setToken, setEmail])
 
   const value = useMemo(
     () => ({
@@ -70,8 +56,10 @@ function AuthProvider({ children }) {
       id,
       login,
       logout,
+      firstLoad,
+      setFirstLoad,
     }),
-    [token, id, login, logout],
+    [token, id, login, logout, firstLoad, setFirstLoad],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

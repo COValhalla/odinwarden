@@ -132,11 +132,8 @@ function Vault() {
       {/* List all logins */}
       <div className="mx-auto max-w-4xl">
         {logins.map((login) => (
-          <div>
-            <div
-              key={login.id}
-              className="mx-2 flex items-center justify-between p-2"
-            >
+          <div key={login.id}>
+            <div className="mx-2 flex items-center justify-between p-2">
               <div className="flex flex-col">
                 <button
                   onClick={() => openEditLoginModal(login)}

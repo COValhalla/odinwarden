@@ -3,10 +3,13 @@ import React from 'react'
 import { useAuth } from '../context/AuthContext'
 
 export function ProtectedLayout() {
-  const { token } = useAuth()
+  const { token, firstLoad } = useAuth()
   const outlet = useOutlet()
 
-  if (!token) {
+  if (token !== null && firstLoad) {
+    return <Navigate to="/lock" />
+  }
+  if (token === null && firstLoad) {
     return <Navigate to="/login" />
   }
 
