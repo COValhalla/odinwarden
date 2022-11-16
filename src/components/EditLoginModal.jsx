@@ -44,6 +44,7 @@ function EditLoginModal(props) {
         <div className="flex flex-col gap-2 text-xs sm:text-base">
           <ModalHeader title="EDIT LOGIN" handleClose={() => onModalClose()} />
           <LoginForm
+            updateLogin={props.updateLogin}
             type="edit"
             data={props.selectedLogin}
             closeModal={() => {

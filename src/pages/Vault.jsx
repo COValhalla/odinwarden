@@ -71,20 +71,51 @@ function Vault() {
     asyncFetch()
   }, [])
 
+  const updateItems = (item, type) => {
+    if (type === 'card') {
+      const newCards = cards.map((c) => {
+        if (c._id === item._id) {
+          return item
+        }
+        return c
+      })
+      setCards(newCards)
+    } else if (type === 'login') {
+      const newLogins = logins.map((l) => {
+        if (l._id === item._id) {
+          return item
+        }
+        return l
+      })
+      setLogins(newLogins)
+    }
+  }
+
+  const addItem = (item, type) => {
+    if (type === 'card') {
+      setCards([...cards, item])
+    } else if (type === 'login') {
+      setLogins([...logins, item])
+    }
+  }
+
   return (
     <div>
       <AddItemModal
+        addItem={addItem}
         isModalOpened={addModalIsOpen}
         onCloseModal={handleCloseAddModal}
       />
 
       <EditCardModal
+        updateCard={updateItems}
         isModalOpened={editCardModalIsOpen}
         onCloseModal={handleCloseEditCardModal}
         selectedCard={selectedCard}
       />
 
       <EditLoginModal
+        updateLogin={updateItems}
         isModalOpened={editLoginModalIsOpen}
         onCloseModal={handleCloseEditLoginModal}
         selectedLogin={selectedLogin}

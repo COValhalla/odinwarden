@@ -48,6 +48,7 @@ function LoginForm(props) {
 
     if (response.status === 200) {
       props.closeModal()
+      props.addItem(response.result, 'login')
     }
   }
 
@@ -75,6 +76,7 @@ function LoginForm(props) {
 
     if (response.status === 200) {
       props.closeModal()
+      props.updateLogin(response.result, 'login')
     }
   }
 

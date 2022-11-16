@@ -59,6 +59,7 @@ function AddItemModal(props) {
 
           {type === 'login' ? (
             <LoginForm
+              addItem={props.addItem}
               type="new"
               data={null}
               closeModal={() => {
@@ -67,6 +68,7 @@ function AddItemModal(props) {
             />
           ) : (
             <CardForm
+              addItem={props.addItem}
               type="new"
               data={null}
               closeModal={() => {
