@@ -179,7 +179,7 @@ export default function VaultMain({
                       {({ active }) => (
                         <button
                           onClick={() => {
-                            openDeleteModal(login._i, 'login')
+                            openDeleteModal(login._id, 'login')
                           }}
                           type="button"
                           className="w-full"
