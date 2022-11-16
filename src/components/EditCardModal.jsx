@@ -26,10 +26,6 @@ Modal.setAppElement('#root')
 
 function EditCardModal(props) {
   // Modal state and functions
-  function afterOpenAddModal(e) {
-    props.onAfterOpen(e)
-  }
-
   function onModalClose(e) {
     props.onCloseModal(e)
   }
@@ -38,9 +34,6 @@ function EditCardModal(props) {
     <div>
       <Modal
         isOpen={props.isModalOpened}
-        onAfterOpen={(e) => {
-          afterOpenAddModal(e)
-        }}
         onRequestClose={() => {
           onModalClose()
         }}

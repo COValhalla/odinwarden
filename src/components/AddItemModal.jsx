@@ -28,9 +28,6 @@ Modal.setAppElement('#root')
 
 function AddItemModal(props) {
   // Modal state and functions
-  function afterOpenAddModal(e) {
-    props.onAfterOpen(e)
-  }
 
   function onModalClose(e) {
     props.onCloseModal(e)
@@ -42,9 +39,6 @@ function AddItemModal(props) {
     <div>
       <Modal
         isOpen={props.isModalOpened}
-        onAfterOpen={(e) => {
-          afterOpenAddModal(e)
-        }}
         onRequestClose={() => {
           onModalClose()
         }}
@@ -66,6 +60,7 @@ function AddItemModal(props) {
           {type === 'login' ? (
             <LoginForm
               type="new"
+              data={null}
               closeModal={() => {
                 onModalClose()
               }}

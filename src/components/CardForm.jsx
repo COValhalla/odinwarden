@@ -60,6 +60,7 @@ function CardForm(props) {
 
     if (response.status === 200) {
       props.closeModal()
+      // Update cards state
     }
   }
 
