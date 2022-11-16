@@ -5,7 +5,7 @@ export default function ModalFooter({
   type,
   onSubmit,
   onUpdate,
-  openDeleteModal,
+  onDelete,
   closeModal,
 }) {
   return (
@@ -39,7 +39,7 @@ export default function ModalFooter({
       {type === 'edit' && (
         // Delete button
         <button
-          onClick={openDeleteModal}
+          onClick={onDelete}
           type="button"
           className="mt-2 rounded border bg-white px-2 py-[2px] text-red-500 transition hover:bg-red-500 hover:text-white"
         >
