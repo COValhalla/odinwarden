@@ -16,10 +16,7 @@ Live Version: https://odinwarden.netlify.app/login
 
 ## Todos
 
-- Login page & Register page submit to back-end
-- [Opt] Get master password hint feature
-- [Opt] Remember email for future logins
-
-- Vaults
-- Filtering
-- [Opt] - Vault based filtering
+- Hash all data on server (currently only password)
+- Multi-item selection
+- Vault items filter
+- Organizations
