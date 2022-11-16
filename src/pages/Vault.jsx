@@ -99,6 +99,16 @@ function Vault() {
     }
   }
 
+  const deleteItems = (item, type) => {
+    if (type === 'card') {
+      const newCards = cards.filter((c) => c._id !== item._id)
+      setCards(newCards)
+    } else if (type === 'login') {
+      const newLogins = logins.filter((l) => l._id !== item._id)
+      setLogins(newLogins)
+    }
+  }
+
   return (
     <div>
       <AddItemModal
@@ -130,6 +140,7 @@ function Vault() {
         logins={logins}
         openEditCardModal={openEditCardModal}
         openEditLoginModal={openEditLoginModal}
+        deleteItems={deleteItems}
       />
     </div>
   )

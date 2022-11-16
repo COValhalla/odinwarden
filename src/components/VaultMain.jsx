@@ -9,6 +9,7 @@ export default function VaultMain({
   cards,
   openEditLoginModal,
   openEditCardModal,
+  deleteItems,
 }) {
   const [itemId, setItemId] = useState(null)
   const [type, setType] = useState(null)
@@ -44,6 +45,7 @@ export default function VaultMain({
 
     if (response.status === 200) {
       setDeleteModalIsOpen(false)
+      deleteItems(response.result, type)
     }
   }
 
