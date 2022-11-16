@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import LoginForm from './LoginForm'
 import CardForm from './CardForm'
 import ModalHeader from './ModalHeader'
+import ModalSelection from './ModalSelection'
 
 const customStyles = {
   content: {
@@ -57,21 +58,10 @@ function AddItemModal(props) {
               onModalClose()
             }}
           />
-
-          <div className="flex flex-col">
-            <label className="py-1" htmlFor="type">
-              What type of item is this?
-            </label>
-            <select
-              onChange={(e) => setType(e.target.value)}
-              id="type"
-              name="type"
-              className="h-8 w-1/2 rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500 sm:w-1/4"
-            >
-              <option value="login">Login</option>
-              <option value="card">Card</option>
-            </select>
-          </div>
+          <ModalSelection
+            title="What type of item is this?"
+            setType={setType}
+          />
 
           {type === 'login' ? (
             <LoginForm
