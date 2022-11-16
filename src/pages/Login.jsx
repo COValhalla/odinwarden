@@ -107,7 +107,7 @@ function Login() {
 
   // If email in localStorage, set checkbox to true
   useEffect(() => {
-    if (localStorage.getItem('email') !== 'null') {
+    if (localStorage.getItem('email') !== null) {
       setChecked(true)
     }
   }, [emailValid])
