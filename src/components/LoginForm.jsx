@@ -29,7 +29,7 @@ function LoginForm(props) {
     e.preventDefault()
     // POST data to server
 
-    const data = await fetch('http://localhost:3000/auth/add/item', {
+    const data = await fetch('http://localhost:3000/auth/add/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ function LoginForm(props) {
     e.preventDefault()
     // POST data to server
 
-    const data = await fetch('http://localhost:3000/auth/update/item', {
+    const data = await fetch('http://localhost:3000/auth/update/login', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -82,7 +82,7 @@ function LoginForm(props) {
 
   const handleDelete = async () => {
     // DELETE data to server
-    const data = await fetch('http://localhost:3000/auth/delete/item', {
+    const data = await fetch('http://localhost:3000/auth/delete/login', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
