@@ -80,7 +80,7 @@ function Lock() {
           />
         </svg>
 
-        <h1 className="pb-1 text-center">
+        <h1 className="pb-1 text-center text-slate-700">
           Your vault is locked. Verify your master password to continue.
         </h1>
       </div>
