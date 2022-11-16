@@ -37,7 +37,7 @@ function Header() {
           >
             Vaults
           </Link>
-          <Link
+          {/* <Link
             to="/tools"
             className={`font-bold ${
               path === '/tools'
@@ -46,7 +46,7 @@ function Header() {
             }`}
           >
             Tools
-          </Link>
+          </Link> */}
         </div>
 
         <div className="invisible items-center md:visible  ">
