@@ -116,7 +116,7 @@ function CardForm(props) {
   }
 
   return (
-    <form className="flex flex-col text-xs sm:text-base " action="">
+    <form className="flex flex-col text-xs sm:text-base">
       <DeleteModal
         isModalOpened={deleteModalIsOpen}
         onCloseModal={(e, result) => {
@@ -130,6 +130,7 @@ function CardForm(props) {
               Name
             </label>
             <input
+              required
               onChange={(e) => setName(e.target.value)}
               value={name}
               className="h-8 w-full rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
@@ -193,7 +194,7 @@ function CardForm(props) {
               name="folder"
               id="folder"
             >
-              <option value="select">- Select -</option>
+              <option value="">- Select -</option>
               <option value="folder1">TBD</option>
               <option value="folder2">TBD</option>
               <option value="folder3">TBD</option>
@@ -211,7 +212,7 @@ function CardForm(props) {
               name="brand"
               id="brand"
             >
-              <option value="select">- Select -</option>
+              <option value="">- Select -</option>
               <option value="Visa">Visa</option>
               <option value="Mastercard">Mastercard</option>
               <option value="American Express">American Express</option>
@@ -230,7 +231,7 @@ function CardForm(props) {
                 name="expmonth"
                 id="expmonth"
               >
-                <option value="select">- Select -</option>
+                <option value="">- Select -</option>
                 <option value="01">01 - January</option>
                 <option value="02">02 - February</option>
                 <option value="03">03 - March</option>

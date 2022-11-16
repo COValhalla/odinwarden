@@ -13,16 +13,16 @@ export default function ModalFooter({
       <div className="flex gap-2">
         {type === 'new' ? (
           <button
-            onClick={onSubmit}
-            type="button"
+            onSubmit={onSubmit}
+            type="submit"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white hover:bg-blue-700"
           >
             Save
           </button>
         ) : (
           <button
-            onClick={onUpdate}
-            type="button"
+            onSubmit={onUpdate}
+            type="submit"
             className="mt-2 rounded bg-blue-500 px-2 py-[2px] text-white transition hover:bg-blue-700"
           >
             Update

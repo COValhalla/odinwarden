@@ -114,6 +114,7 @@ function LoginForm(props) {
           Name
         </label>
         <input
+          required
           onChange={(e) => setName(e.target.value)}
           value={name}
           className="w-1/2 rounded border  border-slate-300 bg-white px-2 py-1 focus:border-blue-500"
