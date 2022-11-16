@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import LoginForm from './LoginForm'
 import CardForm from './CardForm'
+import ModalHeader from './ModalHeader'
 
 const customStyles = {
   content: {
@@ -50,29 +51,13 @@ function AddItemModal(props) {
         contentLabel="Example Modal"
       >
         <div className="flex flex-col gap-2 text-xs sm:text-base">
-          <header className="flex justify-between py-2">
-            <h2>ADD ITEM</h2>
-            <div>
-              <svg
-                onClick={() => {
-                  onModalClose()
-                }}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-6 w-6 cursor-pointer rounded transition hover:bg-slate-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div>
-          </header>
-          <p className="border-b-[1px]"></p>
+          <ModalHeader
+            title="ADD ITEM"
+            handleClose={() => {
+              onModalClose()
+            }}
+          />
+
           <div className="flex flex-col">
             <label className="py-1" htmlFor="type">
               What type of item is this?
