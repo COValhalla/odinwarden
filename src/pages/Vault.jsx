@@ -122,6 +122,7 @@ function Vault() {
         isModalOpened={editCardModalIsOpen}
         onCloseModal={handleCloseEditCardModal}
         selectedCard={selectedCard}
+        deleteItems={deleteItems}
       />
 
       <EditLoginModal
@@ -129,6 +130,7 @@ function Vault() {
         isModalOpened={editLoginModalIsOpen}
         onCloseModal={handleCloseEditLoginModal}
         selectedLogin={selectedLogin}
+        deleteItems={deleteItems}
       />
 
       <Header />

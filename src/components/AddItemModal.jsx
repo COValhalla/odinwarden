@@ -68,6 +68,7 @@ function AddItemModal(props) {
             />
           ) : (
             <CardForm
+              deleteItems={props.deleteItems}
               addItem={props.addItem}
               type="new"
               data={null}

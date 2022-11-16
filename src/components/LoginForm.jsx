@@ -97,6 +97,7 @@ function LoginForm(props) {
 
     if (response.status === 200) {
       props.closeModal()
+      props.deleteItems(props.data, 'login')
     }
   }
 

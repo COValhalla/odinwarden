@@ -58,11 +58,9 @@ function CardForm(props) {
 
     const response = await data.json()
 
-    console.log('TEST Response : ', response)
-
     if (response.status === 200) {
       props.closeModal()
-      props.addItem(response.item, 'card')
+      props.addItem(response.result, 'card')
     }
   }
 
@@ -113,6 +111,7 @@ function CardForm(props) {
 
     if (response.status === 200) {
       props.closeModal()
+      props.deleteItems(props.data, 'card')
     }
   }
 

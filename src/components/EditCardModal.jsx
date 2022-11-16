@@ -29,7 +29,6 @@ function EditCardModal(props) {
   function onModalClose(e) {
     props.onCloseModal(e)
   }
-
   return (
     <div>
       <Modal
@@ -43,6 +42,7 @@ function EditCardModal(props) {
         <div className="flex flex-col gap-2 text-xs sm:text-base">
           <ModalHeader title="EDIT CARD" handleClose={() => onModalClose()} />
           <CardForm
+            deleteItems={props.deleteItems}
             updateCard={props.updateCard}
             type="edit"
             data={props.selectedCard}

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react'
+import React from 'react'
 import Modal from 'react-modal'
 import LoginForm from './LoginForm'
 import ModalHeader from './ModalHeader'
@@ -26,7 +26,6 @@ Modal.setAppElement('#root')
 
 function EditLoginModal(props) {
   // Modal state and functions
-
   function onModalClose(e) {
     props.onCloseModal(e)
   }
@@ -44,6 +43,7 @@ function EditLoginModal(props) {
         <div className="flex flex-col gap-2 text-xs sm:text-base">
           <ModalHeader title="EDIT LOGIN" handleClose={() => onModalClose()} />
           <LoginForm
+            deleteItems={props.deleteItems}
             updateLogin={props.updateLogin}
             type="edit"
             data={props.selectedLogin}
