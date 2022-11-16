@@ -147,7 +147,7 @@ function Lock() {
             {passwordValid === false && (
               <p className="text-xs text-red-500">{passwordError}</p>
             )}
-            <p className="text-xs text-slate-400">
+            <p className="text-[14px] text-slate-500">
               Logged in as {localStorage.getItem('email')} on Odinwarden
             </p>
           </div>
