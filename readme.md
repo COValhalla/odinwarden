@@ -21,3 +21,4 @@ Live Version: https://odinwarden.netlify.app/login
 - Multi-item selection
 - Vault items filter
 - Organizations
+- Improved error handling in vault on adds/updates
