@@ -71,9 +71,9 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
     if (emailValid && passwordValid) {
       // Fetch request to login
+      setLoading(true)
       if (emailValid && passwordValid) {
         // POST fetch to backend api
         const data = await fetch(`${config.url.API_URL}/auth/login`, {
@@ -97,6 +97,7 @@ function Login() {
           // Display error message
           setEmailError(response.message)
           setEmailValid(false)
+          setLoading(false)
         }
       }
     }
@@ -273,6 +274,7 @@ function Login() {
             ) : (
               <button
                 type="submit"
+                disabled={emailValid === false || passwordValid === false}
                 className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
               >
                 <svg
