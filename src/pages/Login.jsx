@@ -20,7 +20,7 @@ function Login() {
 
   const [loading, setLoading] = useState(false)
 
-  if (firstLoad && localStorage.getItem('email') !== null) {
+  if (firstLoad && localStorage.getItem('email') !== 'null') {
     setEmail(localStorage.getItem('email'))
     setFirstLoad(false)
   }
@@ -113,7 +113,7 @@ function Login() {
 
   // If email in localStorage, set checkbox to true
   useEffect(() => {
-    if (localStorage.getItem('email') !== null) {
+    if (localStorage.getItem('email') !== 'null') {
       setChecked(true)
     }
   }, [emailValid])
