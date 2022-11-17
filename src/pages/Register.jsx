@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter'
 import Footer from '../components/Footer'
 import { config } from '../../Constants'
@@ -26,8 +26,6 @@ function Register() {
   const [passwordHint, setPasswordHint] = useState('')
 
   const [loading, setLoading] = useState(false)
-
-  const navigate = useNavigate()
 
   // Updates matching error if either password or passwordConf is changed
   useEffect(() => {
@@ -99,9 +97,9 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
     if (emailValid && passwordValid && passwordConfValid) {
       // POST fetch to backend api
+      setLoading(true)
       const data = await fetch(`${config.url.API_URL}/auth/register`, {
         method: 'POST',
         headers: {
@@ -125,10 +123,12 @@ function Register() {
         localStorage.setItem('token', response.token)
       } else if (response.status === 400) {
         // Display error message
+        setLoading(false)
         console.log('400 Error')
       } else if (response.status === 403) {
         setEmailError('Email already in use.')
         setEmailValid(false)
+        setLoading(false)
       }
     }
 
