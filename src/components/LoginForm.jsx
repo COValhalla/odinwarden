@@ -6,7 +6,6 @@ import ModalFooter from './ModalFooter'
 import { config } from '../../Constants'
 
 function LoginForm(props) {
-  console.log('API Test :', config.url.API_URL)
   const [name, setName] = useState(props.data?.name || '')
   const [username, setUsername] = useState(props.data?.username || '')
   const [password, setPassword] = useState(props.data?.password || '')

@@ -3,6 +3,7 @@
 import React, { Fragment, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import DeleteModal from './DeleteModal'
+import { config } from '../../Constants'
 
 export default function VaultMain({
   logins,
@@ -30,7 +31,7 @@ export default function VaultMain({
 
   const handleDelete = async () => {
     // DELETE data to server
-    const data = await fetch(`http://localhost:3000/auth/delete/${type}`, {
+    const data = await fetch(`${config.url.API_URL}/auth/delete/${type}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
