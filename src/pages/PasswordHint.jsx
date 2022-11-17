@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
+import { config } from '../../Constants'
 
 function PasswordHint() {
   const [email, setEmail] = useState('')
@@ -32,7 +33,7 @@ function PasswordHint() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid) {
-      const response = await fetch('http://localhost:3000/auth/hint', {
+      const response = await fetch(`${config.url.API_URL}/auth/hint`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

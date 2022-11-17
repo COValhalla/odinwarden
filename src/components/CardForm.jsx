@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import DeleteModal from './DeleteModal'
 import ModalFooter from './ModalFooter'
+import { config } from '../../Constants'
 
 function CardForm(props) {
   const [name, setName] = useState(props.data?.name || '')
@@ -38,7 +39,7 @@ function CardForm(props) {
     e.preventDefault()
     // POST data to server
 
-    const data = await fetch('http://localhost:3000/auth/add/card', {
+    const data = await fetch(`${config.url.API_URL}/auth/add/card`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,7 +69,7 @@ function CardForm(props) {
     e.preventDefault()
     // POST data to server
 
-    const data = await fetch('http://localhost:3000/auth/update/card', {
+    const data = await fetch(`${config.url.API_URL}/auth/update/card`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -96,7 +97,7 @@ function CardForm(props) {
   }
 
   const handleDelete = async () => {
-    const data = await fetch('http://localhost:3000/auth/delete/card', {
+    const data = await fetch(`${config.url.API_URL}/auth/delete/card`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -280,7 +281,8 @@ function CardForm(props) {
         ></textarea>
       </div>
       <ModalFooter
-        type={type}        onUpdate={handleUpdate}
+        type={type}
+        onUpdate={handleUpdate}
         onDelete={openDeleteModal}
         closeModal={props.closeModal}
       />

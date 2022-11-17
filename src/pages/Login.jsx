@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { useAuth } from '../context/AuthContext'
+import { config } from '../../Constants'
 
 function Login() {
   const { login } = useAuth()
@@ -72,7 +73,7 @@ function Login() {
       // Fetch request to login
       if (emailValid && passwordValid) {
         // POST fetch to backend api
-        const data = await fetch('http://localhost:3000/auth/login', {
+        const data = await fetch(`${config.url.API_URL}/auth/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

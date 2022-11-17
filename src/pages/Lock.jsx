@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { useAuth } from '../context/AuthContext'
 import Login from './Login'
+import { config } from '../../Constants'
 
 function Lock() {
   const { email, login } = useAuth()
@@ -36,7 +37,7 @@ function Lock() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (passwordValid) {
-      const data = await fetch('http://localhost:3000/auth/login', {
+      const data = await fetch(`${config.url.API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

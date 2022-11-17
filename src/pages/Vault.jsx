@@ -7,6 +7,7 @@ import EditCardModal from '../components/EditCardModal'
 import EditLoginModal from '../components/EditLoginModal'
 import VaultTop from '../components/VaultTop'
 import VaultMain from '../components/VaultMain'
+import { config } from '../../Constants'
 
 Modal.setAppElement('#root')
 
@@ -54,7 +55,7 @@ function Vault() {
   // Fetch logins and cards on mount
   useEffect(() => {
     async function asyncFetch() {
-      const response = await fetch('http://localhost:3000/auth/get-items', {
+      const response = await fetch(`${config.url.API_URL}/auth/get-items`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

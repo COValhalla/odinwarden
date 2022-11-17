@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter'
 import Footer from '../components/Footer'
+import { config } from '../../Constants'
 
 function Register() {
   const [email, setEmail] = useState('')
@@ -95,7 +96,7 @@ function Register() {
     e.preventDefault()
     if (emailValid && passwordValid && passwordConfValid) {
       // POST fetch to backend api
-      const data = await fetch('http://localhost:3000/auth/register', {
+      const data = await fetch(`${config.url.API_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
