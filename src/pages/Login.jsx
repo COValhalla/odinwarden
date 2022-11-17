@@ -120,7 +120,9 @@ function Login() {
 
   const handleRememberMe = () => {
     if (!checked) {
-      localStorage.setItem('email', email)
+      if (emailValid) {
+        localStorage.setItem('email', email)
+      }
       setChecked(true)
     } else {
       localStorage.removeItem('email')
