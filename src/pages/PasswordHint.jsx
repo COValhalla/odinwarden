@@ -7,6 +7,7 @@ function PasswordHint() {
   const [email, setEmail] = useState('')
   const [emailValid, setEmailValid] = useState(false)
   const [emailError, setEmailError] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
@@ -33,6 +34,7 @@ function PasswordHint() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid) {
+      setLoading(true)
       const response = await fetch(`${config.url.API_URL}/auth/hint`, {
         method: 'POST',
         headers: {
@@ -44,12 +46,15 @@ function PasswordHint() {
       if (data.status === 200) {
         setEmailError('Hint sent to your email address.')
         setEmailValid(false)
+        setLoading(false)
       } else if (data.status === 500) {
         setEmailError('Something went wrong. Please try again.')
         setEmailValid(false)
+        setLoading(false)
       } else {
         setEmailError(data.error)
         setEmailValid(false)
+        setLoading(false)
       }
     }
 
@@ -100,6 +105,24 @@ function PasswordHint() {
               type="submit"
               className=" flex flex-grow justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
             >
+              {loading ? (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5 animate-spin self-center"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+              ) : (
+                ''
+              )}
               Submit
             </button>
 
