@@ -38,7 +38,7 @@ export default function ModalFooter({
           <button
             onClick={onUpdate}
             type="button"
-            className="mt-2 flex gap-1 rounded bg-blue-500 px-2 py-[2px] text-white transition hover:bg-blue-700"
+            className="mt-2 flex items-center gap-1 rounded bg-blue-500 px-2 py-[2px] text-white transition hover:bg-blue-700"
           >
             {loading ? (
               <svg
@@ -72,7 +72,7 @@ export default function ModalFooter({
         <button
           onClick={onDelete}
           type="button"
-          className="mt-2 rounded border bg-white px-2 py-[2px] text-red-500 transition hover:bg-red-500 hover:text-white"
+          className="mt-2 rounded border  bg-white px-2 py-[2px] text-red-500 transition hover:bg-red-500 hover:text-white"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
