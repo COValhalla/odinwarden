@@ -50,6 +50,19 @@ function AuthProvider({ children }) {
     navigate('/login', { replace: true })
   }, [navigate, setToken, setEmail])
 
+  const register = useCallback(
+    async (response) => {
+      localStorage.setItem('token', response.token)
+      localStorage.setItem('id', response.user._id)
+      localStorage.setItem('email', response.user.email)
+      setToken(response.token)
+      setId(response.user._id)
+      setEmail(response.user.email)
+      navigate('/vault')
+    },
+    [navigate, setToken, setEmail],
+  )
+
   const value = useMemo(
     () => ({
       token,
@@ -58,8 +71,9 @@ function AuthProvider({ children }) {
       logout,
       firstLoad,
       setFirstLoad,
+      register,
     }),
-    [token, id, login, logout, firstLoad, setFirstLoad],
+    [token, id, login, logout, firstLoad, setFirstLoad, register],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
