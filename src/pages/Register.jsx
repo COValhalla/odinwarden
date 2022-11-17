@@ -42,7 +42,7 @@ function Register() {
   }, [password, passwordConf])
 
   const handleEmailChange = (e) => {
-    const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
+    const emailRegex = /^[a-zA-Z0-9._:$!%-+]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
     setEmail(e.target.value)
     if (emailRegex.test(e.target.value)) {
       setEmailValid(true)
@@ -51,7 +51,7 @@ function Register() {
   }
 
   const checkEmailValidation = () => {
-    const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
+    const emailRegex = /^[a-zA-Z0-9._:$!%-+]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
     if (email.length === 0) {
       setEmailValid(false)
       setEmailError('Input is required.')
