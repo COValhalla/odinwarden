@@ -226,11 +226,8 @@ export default function VaultMain({
       ))}
       {/* List all cards */}
       {cards.map((card) => (
-        <div>
-          <div
-            key={card._id}
-            className="mx-2 flex items-center justify-between p-2"
-          >
+        <div key={card._id}>
+          <div className="mx-2 flex items-center justify-between p-2">
             <div className="flex flex-col">
               <button
                 onClick={() => {
