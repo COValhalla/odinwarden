@@ -11,6 +11,7 @@ function LoginForm(props) {
   const [password, setPassword] = useState(props.data?.password || '')
   const [url, setUrl] = useState(props.data?.url[0] || '')
   const [note, setNote] = useState(props.data?.note || '')
+  const [loading, setLoading] = useState(false)
 
   const [type, setType] = useState(props.type)
 
@@ -29,7 +30,7 @@ function LoginForm(props) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     // POST data to server
-
+    setLoading(true)
     const data = await fetch(`${config.url.API_URL}/auth/add/login`, {
       method: 'POST',
       headers: {
@@ -50,11 +51,13 @@ function LoginForm(props) {
     if (response.status === 200) {
       props.closeModal()
       props.addItem(response.result, 'login')
+      setLoading(false)
     }
   }
 
   const handleUpdate = async (e) => {
     e.preventDefault()
+    setLoading(true)
     // POST data to server
 
     const data = await fetch(`${config.url.API_URL}/auth/update/login`, {
@@ -78,6 +81,7 @@ function LoginForm(props) {
     if (response.status === 200) {
       props.closeModal()
       props.updateLogin(response.result, 'login')
+      setLoading(false)
     }
   }
 
@@ -177,6 +181,7 @@ function LoginForm(props) {
         ></textarea>
       </div>
       <ModalFooter
+        loading={loading}
         type={type}
         onUpdate={handleUpdate}
         onDelete={openDeleteModal}

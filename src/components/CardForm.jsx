@@ -23,6 +23,8 @@ function CardForm(props) {
 
   const [type, setType] = useState(props.type)
 
+  const [loading, setLoading] = useState(false)
+
   // Delete modal
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false)
   const openDeleteModal = () => {
@@ -37,6 +39,7 @@ function CardForm(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     // POST data to server
 
     const data = await fetch(`${config.url.API_URL}/auth/add/card`, {
@@ -62,11 +65,13 @@ function CardForm(props) {
     if (response.status === 200) {
       props.closeModal()
       props.addItem(response.result, 'card')
+      setLoading(false)
     }
   }
 
   const handleUpdate = async (e) => {
     e.preventDefault()
+    setLoading(true)
     // POST data to server
 
     const data = await fetch(`${config.url.API_URL}/auth/update/card`, {
@@ -93,6 +98,7 @@ function CardForm(props) {
     if (response.status === 200) {
       props.closeModal()
       props.updateCard(response.result, 'card')
+      setLoading(false)
     }
   }
 
@@ -281,6 +287,7 @@ function CardForm(props) {
         ></textarea>
       </div>
       <ModalFooter
+        loading={loading}
         type={type}
         onUpdate={handleUpdate}
         onDelete={openDeleteModal}
