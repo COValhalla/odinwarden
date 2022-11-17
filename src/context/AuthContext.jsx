@@ -15,7 +15,7 @@ function AuthProvider({ children }) {
   const [firstLoad, setFirstLoad] = useState(true)
   const [id, setId] = useState('')
   const [token, setToken] = useState(localStorage.getItem('token'))
-  const [email, setEmail] = useState(localStorage.getItem('email'))
+  const [storedEmail, setStoredEmail] = useState(localStorage.getItem('email'))
 
   const navigate = useNavigate()
 
@@ -33,10 +33,10 @@ function AuthProvider({ children }) {
       localStorage.setItem('email', response.user.email)
       setToken(response.token)
       setId(response.user._id)
-      setEmail(response.user.email)
+      setStoredEmail(response.user.email)
       navigate('/vault')
     },
-    [navigate, setToken, setEmail],
+    [navigate, setToken, setStoredEmail],
   )
 
   // call this function to sign out logged in token
@@ -46,9 +46,9 @@ function AuthProvider({ children }) {
     localStorage.removeItem('email')
     setToken(null)
     setId('')
-    setEmail(null)
+    setStoredEmail(null)
     navigate('/login', { replace: true })
-  }, [navigate, setToken, setEmail])
+  }, [navigate, setToken, setStoredEmail])
 
   const register = useCallback(
     async (response) => {
@@ -57,10 +57,10 @@ function AuthProvider({ children }) {
       localStorage.setItem('email', response.user.email)
       setToken(response.token)
       setId(response.user._id)
-      setEmail(response.user.email)
+      setStoredEmail(response.user.email)
       navigate('/vault')
     },
-    [navigate, setToken, setEmail],
+    [navigate, setToken, setStoredEmail],
   )
 
   const value = useMemo(
@@ -72,8 +72,9 @@ function AuthProvider({ children }) {
       firstLoad,
       setFirstLoad,
       register,
+      storedEmail,
     }),
-    [token, id, login, logout, firstLoad, setFirstLoad, register],
+    [token, id, login, logout, firstLoad, setFirstLoad, register, storedEmail],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

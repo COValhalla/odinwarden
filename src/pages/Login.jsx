@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext'
 import { config } from '../../Constants'
 
 function Login() {
-  const { login } = useAuth()
+  const { login, storedEmail } = useAuth()
   const [email, setEmail] = useState('')
   const [emailValid, setEmailValid] = useState('')
   const [emailError, setEmailError] = useState('')
@@ -21,7 +21,7 @@ function Login() {
   const [loading, setLoading] = useState(false)
 
   if (firstLoad && localStorage.getItem('email') !== 'null') {
-    setEmail(localStorage.getItem('email'))
+    setEmail(storedEmail)
     setFirstLoad(false)
   }
 
@@ -113,17 +113,17 @@ function Login() {
 
   // If email in localStorage, set checkbox to true
   useEffect(() => {
-    if (localStorage.getItem('email') !== 'null') {
+    if (storedEmail !== null) {
       setChecked(true)
     }
-  }, [emailValid])
+  }, [storedEmail])
 
   const handleRememberMe = () => {
     if (!checked) {
       localStorage.setItem('email', email)
       setChecked(true)
     } else {
-      localStorage.setItem('email', null)
+      localStorage.removeItem('email')
       setChecked(false)
     }
   }
