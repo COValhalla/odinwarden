@@ -18,7 +18,7 @@ function Login() {
   const [firstLoad, setFirstLoad] = useState(true)
   const [checked, setChecked] = useState(false)
 
-  if (firstLoad && localStorage.getItem('email') !== 'null') {
+  if (firstLoad && localStorage.getItem('email') !== null) {
     setEmail(localStorage.getItem('email'))
     setFirstLoad(false)
   }
