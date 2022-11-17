@@ -8,10 +8,12 @@ import EditLoginModal from '../components/EditLoginModal'
 import VaultTop from '../components/VaultTop'
 import VaultMain from '../components/VaultMain'
 import { config } from '../../Constants'
+import { useAuth } from '../context/AuthContext'
 
 Modal.setAppElement('#root')
 
 function Vault() {
+  const { id } = useAuth()
   // AddItemModal state and functions
   const [addModalIsOpen, setAddModalIsOpen] = useState(false)
 
@@ -61,7 +63,7 @@ function Vault() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          id: localStorage.getItem('id'),
+          id,
         }),
       })
 
