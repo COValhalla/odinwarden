@@ -17,9 +17,10 @@ Backend Code: https://github.com/COValhalla/odinwarden-server
 
 ## Todos
 
-- Form validation and URL launch
+- Form UI improvements (password and copy buttons)
 - Hash all data on server (currently only password)
+- Sanitize and validate BE data
 - Multi-item selection
 - Vault items filter
-- Organizations
+- Organizations (share your passwords with other users)
 - Improved error handling in vault on adds/updates
