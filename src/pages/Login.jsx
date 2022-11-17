@@ -36,7 +36,8 @@ function Login() {
 
   const checkEmailValidation = () => {
     const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
-    if (email.length === 0) {
+    console.log(email === null)
+    if (email === '' || email === 'null' || email === null) {
       setEmailValid(false)
       setEmailError('Input is required.')
     } else if (!emailRegex.test(email)) {
@@ -72,33 +73,30 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (emailValid && passwordValid) {
-      // Fetch request to login
       setLoading(true)
-      if (emailValid && passwordValid) {
-        // POST fetch to backend api
-        const data = await fetch(`${config.url.API_URL}/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
-        })
+      // POST fetch to backend api
+      const data = await fetch(`${config.url.API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      })
 
-        const response = await data.json()
+      const response = await data.json()
 
-        if (response.status === 200) {
-          // Redirect to vault
-          setLoading(false)
-          login(response)
-        } else if (response.status === 400) {
-          // Display error message
-          setEmailError(response.message)
-          setEmailValid(false)
-          setLoading(false)
-        }
+      if (response.status === 200) {
+        // Redirect to vault
+        setLoading(false)
+        login(response)
+      } else if (response.status === 400) {
+        // Display error message
+        setEmailError(response.message)
+        setEmailValid(false)
+        setLoading(false)
       }
     }
 
@@ -276,7 +274,6 @@ function Login() {
             ) : (
               <button
                 type="submit"
-                disabled={emailValid === false || passwordValid === false}
                 className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
               >
                 <svg
