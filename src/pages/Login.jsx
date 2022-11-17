@@ -18,6 +18,8 @@ function Login() {
   const [firstLoad, setFirstLoad] = useState(true)
   const [checked, setChecked] = useState(false)
 
+  const [loading, setLoading] = useState(false)
+
   if (firstLoad && localStorage.getItem('email') !== null) {
     setEmail(localStorage.getItem('email'))
     setFirstLoad(false)
@@ -69,6 +71,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    setLoading(true)
     if (emailValid && passwordValid) {
       // Fetch request to login
       if (emailValid && passwordValid) {
@@ -88,6 +91,7 @@ function Login() {
 
         if (response.status === 200) {
           // Redirect to vault
+          setLoading(false)
           login(response)
         } else if (response.status === 400) {
           // Display error message
@@ -245,26 +249,49 @@ function Login() {
           <p className="border-b-[1px]"></p>
 
           <div className="mt-2 flex gap-3">
-            <button
-              type="submit"
-              className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="h-5 w-5 self-center"
+            {loading ? (
+              <button
+                type="button"
+                className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
-                />
-              </svg>
-              Log In
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5 animate-spin self-center"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
+                  />
+                </svg>
+                Log In
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="max-w-1/2 flex justify-center gap-1 rounded bg-blue-600 px-2 py-[1px] text-center text-base text-white transition duration-200 hover:bg-blue-900 "
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="h-5 w-5 self-center"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+                  />
+                </svg>
+                Log In
+              </button>
+            )}
 
             <Link
               to="/register"

@@ -11,6 +11,7 @@ export default function VaultMain({
   openEditLoginModal,
   openEditCardModal,
   deleteItems,
+  loading,
 }) {
   const [itemId, setItemId] = useState(null)
   const [type, setType] = useState(null)
@@ -61,6 +62,14 @@ export default function VaultMain({
           handleCloseDeleteModal(e, result)
         }}
       />
+      {loading ? (
+        <div className="mx-2 flex items-center justify-between p-2">
+          <span className="text-sm text-gray-500">Loading...</span>
+        </div>
+      ) : (
+        ''
+      )}
+
       {logins.map((login) => (
         <div key={login._id}>
           <div className="mx-2 flex items-center justify-between p-2">

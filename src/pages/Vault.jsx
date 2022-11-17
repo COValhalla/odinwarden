@@ -17,6 +17,8 @@ function Vault() {
   // AddItemModal state and functions
   const [addModalIsOpen, setAddModalIsOpen] = useState(false)
 
+  const [loading, setLoading] = useState(true)
+
   const openAddModal = () => {
     setAddModalIsOpen(true)
   }
@@ -68,11 +70,12 @@ function Vault() {
       })
 
       const data = await response.json()
+      setLoading(false)
       setCards(data.cards)
       setLogins(data.logins)
     }
     asyncFetch()
-  }, [])
+  }, [id])
 
   const updateItems = (item, type) => {
     if (type === 'card') {
@@ -141,6 +144,7 @@ function Vault() {
       <VaultTop openAddModal={openAddModal} />
 
       <VaultMain
+        loading={loading}
         cards={cards}
         logins={logins}
         openEditCardModal={openEditCardModal}
