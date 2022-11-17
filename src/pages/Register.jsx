@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import PasswordStrengthMeter from '../components/PasswordStrengthMeter'
@@ -112,7 +113,9 @@ function Register() {
       const response = await data.json()
 
       if (response.status === 200) {
-        // Redirect to vault
+        localStorage.setItem('token', response.token)
+        localStorage.setItem('id', response.user._id)
+        localStorage.setItem('email', response.user.email)
         navigate('/vault')
 
         // Store JWT in localStorage
