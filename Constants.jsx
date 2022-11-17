@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv'
+dotenv.config()
+
 const prod = {
   url: {
     API_URL: 'https://odinwarden-server.herokuapp.com',
