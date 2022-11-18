@@ -36,7 +36,6 @@ function Login() {
 
   const checkEmailValidation = () => {
     const emailRegex = /^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$/
-    console.log(email === null)
     if (email === '' || email === 'null' || email === null) {
       setEmailValid(false)
       setEmailError('Input is required.')
