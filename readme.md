@@ -13,7 +13,7 @@ Backend Code: https://github.com/COValhalla/odinwarden-server
 
 - [Vite]
 - [React]
-- [React-Bootstrap]
+- [TailwindCSS]
 
 ## Todos
 
