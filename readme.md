@@ -19,6 +19,7 @@ Backend Code: https://github.com/COValhalla/odinwarden-server
 
 - Form UI improvements (password and copy buttons)
 - Hash all data on server (currently only password)
+- Use JWT for all fetchs (not userID)
 - Sanitize and validate BE data
 - Multi-item selection
 - Vault items filter
